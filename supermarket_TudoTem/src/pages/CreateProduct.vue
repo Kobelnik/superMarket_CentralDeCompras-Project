@@ -93,17 +93,17 @@ h1 {
     display: flex;
     gap: 15px; /* Aumenta o espaçamento entre elementos */
     width: 600px; /* Largura fixa para desktop para um visual controlado */
-    padding: 30px;
+    padding: 20px;
     background-color: white;
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Sombra suave para profundidade */
+    box-shadow: 0 4px 12px #00000014; /* Sombra suave para profundidade */
 }
 
 /* Agrupamento de campos lado a lado (Quantidade e Preço) */
 .input-group {
     display: flex;
     gap: 20px;
-    width: 100%;
+    width: 99.4%;
 }
 
 .input-item {
@@ -113,25 +113,31 @@ h1 {
 }
 
 /* Estilo para todos os inputs (texto, número, etc.) e textarea */
+.formulario input {
+    border-radius: 5px;
+    width: 98.5%;
+    height: 30px;
+    border: 1px solid #444444; /* Borda mais suave */
+}
+
 .formulario textarea {
-    height: auto;
-    width: 100%; 
     padding: 12px 15px; /* Padding interno profissional */
     margin-top: 5px;
     margin-bottom: 15px; /* Espaço após o campo */
     border-radius: 8px;
-    border: 1px solid #ddd; /* Borda mais suave */
+    border: 1px solid #444444; /* Borda mais suave */
     box-sizing: border-box; /* Garante que padding e border não aumentem a largura */
     font-size: 16px;
     transition: border-color 0.2s;
+    resize: vertical;
 }
 
 .decoTextForms {
-    font-size: 16px;
-    font-weight: 600; /* Levemente menos negrito */
-    color: #333;
+    font-size: 18px;
+    font-weight: 600; 
+    color: #242424;
     margin-bottom: 5px;
-    display: block; /* Garante que o label ocupe sua própria linha */
+    display: block; 
 }
 
 /* Edição do botão de criar produto */
