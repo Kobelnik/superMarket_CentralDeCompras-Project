@@ -1,6 +1,9 @@
 <template>
     <div class="form-container">
         <section class="formulario">
+            <span  class="titleForms">
+                <h1>Crie aqui o seu anúncio!</h1>
+            </span>
             <label for="name">
                 <span class="decoTextForms"> Nome do Produto: </span>
             </label>
@@ -74,10 +77,14 @@ const newProduct = reactive<Product>({
     min-height: 100vh;
 }
 
+titleForms {
+    background-color: #333;
+}
+
 h1 {
-    color: #333;
+    color: #1d1d1d;
     margin-bottom: 30px;
-    font-size: 28px;
+    font-size: 30px;
 }
 
 /* Edição do formulário de criar anuncio */
@@ -106,7 +113,6 @@ h1 {
 }
 
 /* Estilo para todos os inputs (texto, número, etc.) e textarea */
-.formulario input:not([type='submit']), 
 .formulario textarea {
     height: auto;
     width: 100%; 
@@ -118,18 +124,6 @@ h1 {
     box-sizing: border-box; /* Garante que padding e border não aumentem a largura */
     font-size: 16px;
     transition: border-color 0.2s;
-}
-
-.formulario input:focus,
-.formulario textarea:focus {
-    border-color: #ec5711; /* Borda colorida ao focar */
-    outline: none;
-}
-
-.formulario textarea {
-    height: 120px; /* Altura da descrição */
-    resize: vertical; /* Permite redimensionar apenas verticalmente (melhor usabilidade) */
-    color: #333; /* Cor do texto padrão mais escura */
 }
 
 .decoTextForms {
