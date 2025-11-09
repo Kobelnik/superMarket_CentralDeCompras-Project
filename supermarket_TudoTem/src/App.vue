@@ -2,6 +2,7 @@
 import ProductCard from './components/ProductCard.vue';
 import ProductList from './components/ProductList.vue';
 import Header from './components/Header.vue';
+import Footer from './components/Footer.vue';
 </script>
 
 <template>
@@ -10,12 +11,13 @@ import Header from './components/Header.vue';
     <RouterView />
     <ProductList />
     <ProductCard />
+    <Footer />
   </div>
 </template>
 
 <style scoped>
   * {
-    margin: 0;
+    margin-top: -8px;
     padding: 0;
     box-sizing: border-box;
   }
