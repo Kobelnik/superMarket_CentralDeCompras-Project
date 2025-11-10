@@ -1,24 +1,44 @@
+<template>
+    <div id="app-layout">
+        <Header />
+        
+        <main class="main-content">
+            <RouterView /> 
+        </main>
+        
+        <ProductList /> 
+        <Footer />
+    </div>
+</template>
+
 <script setup lang="ts">
-import ProductCard from './components/ProductCard.vue';
-import ProductList from './components/ProductList.vue';
+import ProductList from './components/ProductList.vue'; 
 import Header from './components/Header.vue';
 import Footer from './components/Footer.vue';
 </script>
 
-<template>
-  <div id="app">
-    <Header />
-    <RouterView />
-    <ProductList />
-    <ProductCard />
-    <Footer />
-  </div>
-</template>
-
-<style scoped>
-  * {
-    margin-top: -8px;
+<style>
+* {
+    margin: 0; 
     padding: 0;
     box-sizing: border-box;
-  }
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; 
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+}
+
+#app-layout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.main-content {
+    flex-grow: 1; 
+}
 </style>

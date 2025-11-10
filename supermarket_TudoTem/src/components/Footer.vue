@@ -12,6 +12,8 @@
 
 <style scoped>
     .app-footer {
+    padding: 25px 0; 
+    text-align: center;
     background-color: #dddcdcf5; 
     display: flex;
     width: 100%;
