@@ -1,7 +1,10 @@
 <template>
     <RouterLink :to="`/product/${product.id}`" class="product-card-link">
         <div class="product-card">
-            
+            <div class="card-header">
+                <h3 class="product-name">{{ product.name }}</h3>
+            </div>
+
             <button @click.prevent.stop="handleAddToCart" class="add-to-cart-button">
                 <span class="icon">+</span>
             </button>
@@ -11,8 +14,7 @@
             </div>
             
             <div class="card-details">
-                <h3 class="product-name">{{ product.name }}</h3>
-
+                <span class="product-category">{{ product.category }}</span>
                 <span class="product-price">{{ formatCurrency(product.price) }}</span>
             </div>
         </div>
@@ -54,24 +56,40 @@ const handleAddToCart = () => {
 .product-card { 
     position: relative;
     background-color: #fff; 
-    border-radius: 8px; 
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); 
+    border-radius: 18px; 
+    border: 1px solid rgba(31, 111, 181, 0.08);
+    box-shadow: 0 15px 30px rgba(27, 61, 104, 0.08); 
     overflow: hidden; 
     display: flex; 
     flex-direction: column; 
-    transition: transform 0.2s; 
+    transition: transform 0.25s ease, box-shadow 0.25s ease; 
     height: 100%; 
 }
 
 .product-card:hover { 
-    transform: translateY(-5px); 
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); 
+    transform: translateY(-10px); 
+    box-shadow: 0 25px 45px rgba(27, 61, 104, 0.18); 
     cursor: pointer;
+}
+
+.card-header {
+    padding: 20px 22px 0;
+    display: flex;
+    align-items: center;
+    min-height: 72px;
+}
+
+.product-name { 
+    font-size: 1.2em; 
+    font-weight: 700; 
+    margin: 0; 
+    color: #142239; 
+    line-height: 1.3;
 }
 
 .add-to-cart-button {
     position: absolute;
-    top: 10px;
+    top: 18px;
     right: 10px;
     background-color: #ec5711; 
     color: white;
@@ -99,9 +117,9 @@ const handleAddToCart = () => {
 
 .card-image { 
     width: 100%; 
-    height: 180px; 
+    height: 190px; 
     overflow: hidden; 
-    background-color: #f0f0f0; 
+    background: linear-gradient(135deg, rgba(31,111,181,0.08), rgba(236,87,17,0.06)); 
 }
 
 .card-image img { 
@@ -111,24 +129,30 @@ const handleAddToCart = () => {
 }
 
 .card-details { 
-    padding: 15px; 
+    padding: 16px 22px 24px; 
     display: flex; 
     flex-direction: column; 
     flex-grow: 1; 
+    gap: 12px;
 }
 
-.product-name { 
-    font-size: 1.1em; 
-    font-weight: 600; 
-    margin: 0 0 5px 0; 
-    color: #333; 
-    flex-grow: 1; 
+.product-category {
+    display: inline-flex;
+    align-self: flex-start;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: rgba(31, 111, 181, 0.1);
+    color: #1f6fb5;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .product-price { 
-    font-size: 1.3em; 
+    font-size: 1.35em; 
     font-weight: 700; 
-    color: #333; 
-    margin-bottom: 5px; 
+    color: #ec5711; 
+    margin-bottom: 0; 
 }
 </style>

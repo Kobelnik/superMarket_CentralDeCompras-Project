@@ -7,10 +7,25 @@
             <button @click="router.push('/')" class="continue-shopping">Continuar Comprando</button>
         </div>
         
-        <div v-else class="cart-content-wrapper">
-            
+        <div v-else>
+            <div class="cart-category-nav">
+                <button
+                    v-for="category in categories"
+                    :key="category"
+                    :class="['category-pill', { active: isCategoryActive(category) }]"
+                    @click="toggleCategoryFilter(category)"
+                >
+                    {{ category }}
+                </button>
+            </div>
+
+            <div class="cart-content-wrapper">
             <div class="cart-list-section">
-                <div v-for="item in cartStore.items" :key="item.id" class="cart-item">
+                <div
+                    v-for="item in cartStore.items"
+                    :key="item.id"
+                    :class="['cart-item', { 'inactive-category': !isCategoryActive(item.product.category) }]"
+                >
                     
                     <div class="item-details">
                         <img :src="item.product.imageUrl || 'placeholder.jpg'" :alt="item.product.name" class="item-image">
@@ -46,29 +61,28 @@
                 <h2>Resumo da Compra</h2>
                 <div class="summary-line">
                     <span>Itens Selecionados ({{ selectedItemsCount }})</span>
-                    <span>{{ formatCurrency(cartStore.cartTotal) }}</span>
+                    <span>{{ formatCurrency(filteredCartTotal) }}</span>
                 </div>
                 
                 <p class="total-label">Total a Pagar:</p>
-                <p class="final-total">{{ formatCurrency(cartStore.cartTotal) }}</p>
+                <p class="final-total">{{ formatCurrency(filteredCartTotal) }}</p>
                 
                 <button class="checkout-button">Finalizar Compra</button>
             </div>
+        </div>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, ref, onMounted, watch } from 'vue';
 import { useRouter } from 'vue-router';
 import { useCartStore } from '../stores/cart';
+import { useCategoriesStore } from '../stores/categories';
 
 const router = useRouter();
 const cartStore = useCartStore();
-
-const selectedItemsCount = computed(() => {
-    return cartStore.items.filter(item => item.isSelected).length;
-});
+const categoriesStore = useCategoriesStore();
 
 const formatCurrency = (value: number): string => {
     return new Intl.NumberFormat('pt-BR', {
@@ -77,6 +91,54 @@ const formatCurrency = (value: number): string => {
         minimumFractionDigits: 2,
     }).format(value);
 };
+
+const categories = computed(() => categoriesStore.allCategories);
+const activeCategories = ref<string[]>([]);
+
+function emitCategorySync(newSelection: string[]) {
+    activeCategories.value = [...newSelection];
+}
+
+onMounted(() => {
+    emitCategorySync(categories.value);
+});
+
+watch(
+    () => categories.value,
+    (newCategories, oldCategories = []) => {
+        const currentSet = new Set(activeCategories.value);
+        const preservedSelection = newCategories.filter(cat => currentSet.has(cat));
+        const addedCategories = newCategories.filter(cat => !oldCategories.includes(cat));
+        const nextSelection = [...preservedSelection, ...addedCategories.filter(cat => !preservedSelection.includes(cat))];
+        emitCategorySync(nextSelection);
+    },
+    { immediate: false }
+);
+
+function isCategoryActive(category: string) {
+    return activeCategories.value.includes(category);
+}
+
+function toggleCategoryFilter(category: string) {
+    if (isCategoryActive(category)) {
+        activeCategories.value = activeCategories.value.filter(cat => cat !== category);
+    } else {
+        activeCategories.value = [...activeCategories.value, category];
+    }
+}
+
+const filteredCartTotal = computed(() => {
+    return cartStore.items.reduce((total, item) => {
+        if (item.isSelected && isCategoryActive(item.product.category)) {
+            return total + item.product.price * item.quantity;
+        }
+        return total;
+    }, 0);
+});
+
+const selectedItemsCount = computed(() => {
+    return cartStore.items.filter(item => item.isSelected && isCategoryActive(item.product.category)).length;
+});
 </script>
 
 <style scoped>
@@ -96,6 +158,7 @@ h1 {
     display: flex; 
     gap: 40px; 
     align-items: flex-start; 
+    margin-top: 20px;
 }
 
 /* --- LADO ESQUERDO: LISTA --- */
@@ -308,6 +371,42 @@ h1 {
 
 .checkout-button:hover { 
     background-color: #008f45; 
+}
+
+.cart-category-nav {
+    width: 100%;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    background: #fff;
+    padding: 12px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.category-pill {
+    padding: 10px 16px;
+    border-radius: 999px;
+    border: 1px solid rgba(236, 87, 17, 0.4);
+    background: #fff;
+    color: #ec5711;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.category-pill.active {
+    background: linear-gradient(135deg, #ec5711 0%, #fca311 100%);
+    color: #fff;
+    border-color: transparent;
+}
+
+.category-pill:not(.active):hover {
+    background: rgba(236, 87, 17, 0.1);
+}
+
+.cart-item.inactive-category {
+    opacity: 0.4;
 }
 
 .empty-cart { 

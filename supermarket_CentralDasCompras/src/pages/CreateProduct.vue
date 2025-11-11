@@ -75,13 +75,15 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref } from 'vue';
+import { reactive, ref, computed } from 'vue';
 import type { Product } from '../types/Product.ts';
 import { useRouter } from 'vue-router';
 import { useProductStore } from '../stores/product'; 
+import { useCategoriesStore } from '../stores/categories';
 
 const productStore = useProductStore();
 const router = useRouter();
+const categoriesStore = useCategoriesStore();
 
 const newProduct = reactive<Product>({
     id: 0, name: '', price: 0, description: '', quantity: 0, category: '', imageUrl: '',
@@ -107,17 +109,17 @@ const handlePriceInput = (event: Event) => {
     }
 };
 
-const availableCategories = ref(['Eletrônicos', 'Moda', 'Casa e Decoração', 'Esportes']);
+const availableCategories = computed(() => categoriesStore.allCategories);
 const newCategoryInput = ref('');
 const isAddingCategory = ref(false);
 
 function addNewCategory() {
-    if (newCategoryInput.value && !availableCategories.value.includes(newCategoryInput.value)) {
-        availableCategories.value.push(newCategoryInput.value);
-        newProduct.category = newCategoryInput.value;
-        newCategoryInput.value = '';
-        isAddingCategory.value = false;
-    }
+    const value = newCategoryInput.value.trim();
+    if (!value) return;
+    categoriesStore.addCategory(value);
+    newProduct.category = value;
+    newCategoryInput.value = '';
+    isAddingCategory.value = false;
 }
 
 function handleFileUpload(event: Event) {
@@ -279,17 +281,17 @@ h1 {
 }
 
 .confirm-category-btn { 
-    background-color: #5cb85c; 
+    background: linear-gradient(135deg, #ec5711 0%, #fca311 100%); 
     color: white; 
     border: none; 
     padding: 5px 15px; 
     border-radius: 6px; 
     cursor: pointer; 
-    transition: background-color 0.2s; 
+    transition: filter 0.2s; 
 }
 
 .confirm-category-btn:hover { 
-    background-color: #4cae4c; 
+    filter: brightness(0.95); 
 }
 
 .formulario textarea { 

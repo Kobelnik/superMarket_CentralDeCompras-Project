@@ -26,8 +26,8 @@ body {
     margin: 0;
     padding: 0;
     overflow-x: hidden; 
-    font-family: Arial, sans-serif;
-    background-color: #f8f8f8;
+    font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(135deg, #f1f4f9 0%, #e5ecf6 100%);
 }
 
 #app-layout {
