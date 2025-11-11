@@ -1,5 +1,5 @@
-🇧🇷 Parágrafo em Português
-A Central das Compras é um marketplace web desenvolvido com Vue.js e TypeScript, utilizando Pinia para gerenciamento de estado e Axios para simular a persistência de dados. O projeto apresenta um fluxo de e-commerce completo, permitindo aos usuários criar novos anúncios com controle de categoria e imagem. A homepage oferece uma barra lateral de filtros em tempo real e uma busca global, enquanto o carrinho de compras implementa lógica inteligente para gerenciar quantidades, aplicar seleção de itens e recalcular o total da compra.
+🇧🇷 
+A Central das Compras é um marketplace web desenvolvido com Vue.js e TypeScript, utilizando Pinia para gerenciamento de estado e Axios para simular a persistência de dados. O projeto apresenta um fluxo de e-commerce completo, permitindo aos usuários criar anúncios com controle de categoria e imagem. A homepage oferece uma barra lateral de filtros em tempo real e uma busca global, enquanto o carrinho de compras implementa lógica inteligente para gerenciar quantidades, aplicar seleção de itens e recalcular o total da compra. Todo o design (inclusive a logo) foi desenvolvido por mim.
 
-🇺🇸 Paragraph in English
+🇺🇸 
 The Central das Compras is a web marketplace built using Vue.js and TypeScript, utilizing Pinia for state management and Axios to simulate data persistence. The project features a complete e-commerce flow, allowing users to create new listings with category and image control. The homepage offers a real-time category filter sidebar and global search, while the shopping cart implements smart logic to manage quantities, apply item selection, and dynamically recalculate the total purchase amount.
