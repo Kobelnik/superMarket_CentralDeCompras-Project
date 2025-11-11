@@ -1,3 +1,7 @@
+/******************************************************************/
+/* Página principal do marketplace                                */
+/******************************************************************/
+
 <template>
 	<div class="home-layout">
 		<div class="header-actions"></div>
@@ -86,7 +90,6 @@
 	}
 
 	onMounted(() => {
-		// Chamada de carregamento (síncrona/simulada)
 		productStore.fetchProducts();
 	});
 </script>

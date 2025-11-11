@@ -1,3 +1,9 @@
+/***************************************************************/
+/* Este componente representa a página do Carrinho de Compras. */
+/* É responsável por exibir a lista de itens adicionados,      */
+/* permitir o ajuste de quantidade, aplicar filtros por        */
+/* categoria.                                                  */
+/***************************************************************/
 <template>
     <div class="cart-page-container">
         <h1>Seu Carrinho de Compras</h1>
@@ -92,9 +98,19 @@ const formatCurrency = (value: number): string => {
     }).format(value);
 };
 
+/*************************************************************************/
+/* SArmazena as categorias existentes e as que ainda estão a ser criadas */
+/*************************************************************************/
 const categories = computed(() => categoriesStore.allCategories);
+
+/******************************************************************/
+/* Essa variável determina quaiscategorias estão ativas no filtro */
+/******************************************************************/
 const activeCategories = ref<string[]>([]);
 
+/******************************************************************/
+/* Sincroniza todos oscampos que usam categorias                  */
+/******************************************************************/
 function emitCategorySync(newSelection: string[]) {
     activeCategories.value = [...newSelection];
 }
@@ -115,10 +131,16 @@ watch(
     { immediate: false }
 );
 
+/******************************************************************/
+/* Verifica se determinada categoria está ativa (selecionada)     */
+/******************************************************************/
 function isCategoryActive(category: string) {
     return activeCategories.value.includes(category);
 }
 
+/******************************************************************/
+/* Altera o estado do filtro de uma categoria (ativa ou não)      */
+/******************************************************************/
 function toggleCategoryFilter(category: string) {
     if (isCategoryActive(category)) {
         activeCategories.value = activeCategories.value.filter(cat => cat !== category);
@@ -136,6 +158,9 @@ const filteredCartTotal = computed(() => {
     }, 0);
 });
 
+/********************************************************************/
+/* Contador de quantos itens estão visíveis no filtro por categoria */
+/********************************************************************/
 const selectedItemsCount = computed(() => {
     return cartStore.items.filter(item => item.isSelected && isCategoryActive(item.product.category)).length;
 });

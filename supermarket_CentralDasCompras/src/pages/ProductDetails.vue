@@ -1,3 +1,7 @@
+/**************************************************************************************************/
+/* Página naqual apresenta todos osdetalhes de cada anuncio (ao clicar em algum card na homepage) */
+/**************************************************************************************************/
+
 <template>
     <div v-if="product" class="product-detail-page">
         <button @click="router.push('/')" class="back-button">← Voltar</button>
@@ -50,6 +54,9 @@ const cartStore = useCartStore();
 
 const product = ref<Product | null>(null);
 
+/*******************************************************************/
+/* Componente que procura pelo produto que foi armazenado no store */
+/*******************************************************************/
 onMounted(() => {
     const productId = route.params.id as string;
     const idAsNumber = parseInt(productId);
@@ -61,13 +68,12 @@ onMounted(() => {
     }
 });
 
-// 🔑 NOVA FUNÇÃO: Adiciona o produto ao carrinho e atualiza o indicador
+/*******************************************************************/
+/* Adiciona o produto selecionado no carrinho                      */
+/*******************************************************************/
 const handleAddToCart = () => {
     if (product.value) {
         cartStore.addToCart(product.value);
-        
-        // 🗑️ REMOVIDO: O alert que você não queria mais.
-        // alert(`"${product.value.name}" adicionado ao carrinho! Quantidade atual: ${cartStore.itemCount}`);
     }
 }
 const formatCurrency = (value: number): string => {
@@ -113,7 +119,6 @@ const formatCurrency = (value: number): string => {
     gap: 40px; 
 }
 
-/* --- Coluna Esquerda: Imagem e Descrição --- */
 .image-section {
     flex: 2; 
 }
@@ -146,7 +151,7 @@ const formatCurrency = (value: number): string => {
     overflow-wrap: break-word; 
 }
 
-/* --- Coluna Direita: Compra e Preço --- */
+
 .purchase-section {
     flex: 1; 
     padding: 20px;

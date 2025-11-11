@@ -1,3 +1,7 @@
+/******************************************************************/
+/* Esse arquivo representa o formulario de criação de anuncios    */
+/******************************************************************/
+
 <template>
     <div class="form-container">
         <section class="formulario">
@@ -85,6 +89,9 @@ const productStore = useProductStore();
 const router = useRouter();
 const categoriesStore = useCategoriesStore();
 
+/**********************************************************************/
+/* lista que armazena todas as informacoes necessarias de um anuncio  */
+/**********************************************************************/
 const newProduct = reactive<Product>({
     id: 0, name: '', price: 0, description: '', quantity: 0, category: '', imageUrl: '',
 });
@@ -109,6 +116,9 @@ const handlePriceInput = (event: Event) => {
     }
 };
 
+/**************************************************************************/
+/* propriedade que traz a listagem de categorias do store global (pinia)  */
+/**************************************************************************/
 const availableCategories = computed(() => categoriesStore.allCategories);
 const newCategoryInput = ref('');
 const isAddingCategory = ref(false);
