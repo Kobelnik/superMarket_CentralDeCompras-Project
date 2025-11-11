@@ -21,18 +21,12 @@
 
 <script setup lang="ts">
     import { onMounted } from 'vue';
-    import { useRouter } from 'vue-router';
     import { storeToRefs } from 'pinia';
     import { useProductStore } from '../stores/product';
     import ProductCard from '../components/ProductCard.vue';
 
-    const router = useRouter();
     const productStore = useProductStore();
     const { products } = storeToRefs(productStore); 
-
-    function goToCreateProduct() {
-        router.push('/create-product');
-    }
 
     onMounted(() => {
         // Chamada de carregamento (síncrona/simulada)
