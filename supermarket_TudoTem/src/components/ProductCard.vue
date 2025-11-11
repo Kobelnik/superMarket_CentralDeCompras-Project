@@ -1,25 +1,32 @@
 <template>
-    <div class="product-card">
-        <div class="card-image">
-            <img :src="product.imageUrl || 'placeholder.jpg'" :alt="product.name" />
+    <RouterLink :to="`/product/${product.id}`" class="product-card-link">
+        <div class="product-card">
+            
+            <button @click.prevent.stop="handleAddToCart" class="add-to-cart-button">
+                <span class="icon">+</span>
+            </button>
+            
+            <div class="card-image">
+                <img :src="product.imageUrl || 'placeholder.jpg'" :alt="product.name" />
+            </div>
+            
+            <div class="card-details">
+                <h3 class="product-name">{{ product.name }}</h3>
+
+                <span class="product-price">{{ formatCurrency(product.price) }}</span>
+            </div>
         </div>
-        
-        <div class="card-details">
-            <h3 class="product-name">{{ product.name }}</h3>
-
-            <p class="product-description">{{ product.description.substring(0, 50) + '...' }}</p>
-
-            <span class="product-price">{{ formatCurrency(product.price) }}</span>
-
-            <button class="buy-button">Ir para o anúncio</button>
-        </div>
-    </div>
+    </RouterLink>
 </template>
 
 <script setup lang="ts">
 import type { Product } from '../types/Product.ts';
+import { RouterLink } from 'vue-router';
+import { useCartStore } from '../stores/cart';
 
-defineProps<{
+const cartStore = useCartStore();
+
+const props = defineProps<{
     product: Product;
 }>();
 
@@ -30,10 +37,22 @@ const formatCurrency = (value: number): string => {
         minimumFractionDigits: 2,
     }).format(value);
 };
+
+const handleAddToCart = () => {
+    cartStore.addToCart(props.product);
+}
 </script>
 
 <style scoped>
+.product-card-link { 
+    text-decoration: none; 
+    color: inherit; 
+    display: block; 
+    height: 100%; 
+}
+
 .product-card { 
+    position: relative;
     background-color: #fff; 
     border-radius: 8px; 
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); 
@@ -47,6 +66,35 @@ const formatCurrency = (value: number): string => {
 .product-card:hover { 
     transform: translateY(-5px); 
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); 
+    cursor: pointer;
+}
+
+.add-to-cart-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #ec5711; 
+    color: white;
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.2em;
+    font-weight: bold;
+    z-index: 10;
+    transition: background-color 0.2s;
+}
+
+.add-to-cart-button:hover {
+    background-color: #d64a0e;
+}
+
+.icon { 
+    line-height: 1; 
 }
 
 .card-image { 
@@ -74,12 +122,6 @@ const formatCurrency = (value: number): string => {
     font-weight: 600; 
     margin: 0 0 5px 0; 
     color: #333; 
-}
-
-.product-description { 
-    font-size: 0.9em; 
-    color: #777; 
-    margin-bottom: 10px; 
     flex-grow: 1; 
 }
 
@@ -87,22 +129,6 @@ const formatCurrency = (value: number): string => {
     font-size: 1.3em; 
     font-weight: 700; 
     color: #333; 
-    margin-bottom: 15px; 
-}
-
-.buy-button { 
-    background-color: #007bff; 
-    color: white; 
-    border: none; 
-    padding: 8px 10px; 
-    border-radius: 4px; 
-    cursor: pointer; 
-    font-weight: 500; 
-    transition: background-color 0.2s; 
-    text-align: center; 
-}
-
-.buy-button:hover { 
-    background-color: #0056b3; 
+    margin-bottom: 5px; 
 }
 </style>

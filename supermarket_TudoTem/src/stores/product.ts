@@ -7,8 +7,15 @@ export const useProductStore = defineStore('product', {
     }),
     
     actions: {
-        addProduct(product: Product) {
-            this.products.push(product);
+        // Ação síncrona, salva apenas na memória.
+        addProduct(productToAdd: Product) {
+            this.products.push(productToAdd);
+        },
+
+        // Ação de busca síncrona (não faz nada, apenas retorna o array local)
+        fetchProducts() {
+            // Em projetos de memória, esta função apenas garante a existência.
+            return this.products;
         },
     },
 });

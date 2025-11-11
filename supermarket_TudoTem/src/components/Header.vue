@@ -1,77 +1,99 @@
 <template>
     <header class="app-header">
-        <!-- ÁREA DO LOGO (EXTREMA ESQUERDA) -->
         <div class="logo-area">
             <RouterLink to="/">
-                <!-- Caminho da imagem mantido -->
                 <img src="/LogoMarketplace.svg" alt="Logo do Marketplace" class="header-logo"> 
             </RouterLink>
         </div>
 
-        <!-- ÁREA DE NAVEGAÇÃO E BOTÃO (EXTREMA DIREITA) -->
         <nav class="nav-actions">
-            <button @click="goToCreateProduct" class="create-button">
+            <button @click="goToCreateProduct" class="create-button" v-if="route.path !== '/create-product'">
                 Criar Anúncio
             </button>
             
-            <!-- Outros links que você queira adicionar aqui -->
+            <RouterLink to="/cart" class="cart-link">
+                <span class="cart-icon">🛒</span>
+                <span v-if="cartStore.itemCount > 0" class="cart-count">{{ cartStore.itemCount }}</span>
+            </RouterLink>
         </nav>
     </header>
 </template>
 
 <script setup lang="ts">
-import { useRouter } from 'vue-router';
+import { useRouter, useRoute } from 'vue-router';
+import { useCartStore } from '../stores/cart'; 
 
 const router = useRouter();
+const route = useRoute();
+const cartStore = useCartStore();
 
 function goToCreateProduct() {
     router.push('/create-product');
 }
 </script>
+
 <style scoped>
-/* A CHAVE: O justify-content: space-between separa o .logo-area e o .nav-actions */
-.app-header {
+.app-header { 
     background-color: #29abe2; 
-    padding: 10px 40px;
-    display: flex;
+    padding: 10px 40px; 
+    display: flex; 
     justify-content: space-between; 
-    align-items: center;
-    width: 100%;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    align-items: center; 
+    width: 100%; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
 }
 
-.logo-area {
-    /* Garante que a área do logo fique na esquerda */
+.logo-area { 
+    display: flex; 
+    align-items: center; 
+}
+
+.header-logo { 
+    height: 40px; 
+    display: block; 
+}
+
+.nav-actions { 
+    display: flex; 
+    align-items: center; 
+    gap: 20px; 
+}
+
+.create-button { 
+    background-color: #ec5711; 
+    color: white; 
+    border: none; 
+    padding: 8px 15px; 
+    border-radius: 6px; 
+    cursor: pointer; 
+    font-weight: bold; 
+    transition: background-color 0.2s; 
+}
+
+.create-button:hover { 
+    background-color: #c23c13; 
+}
+
+.cart-link {
+    position: relative;
+    padding: 0 5px; 
+    font-size: 1.5em; 
+    text-decoration: none;
+    color: inherit;
     display: flex;
     align-items: center;
 }
 
-.header-logo {
-    /* Se for SVG/imagem, esta linha ajusta o tamanho */
-    height: 70px; 
-    display: block;
-}
-
-.nav-actions {
-    /* Este contêiner contém o botão e está na extrema direita */
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-/* Estilo do Botão Criar Anúncio */
-.create-button {
+.cart-count {
+    position: absolute;
+    top: -5px;
+    right: -10px;
     background-color: #ec5711;
     color: white;
-    border: none;
-    padding: 16px 40px;
-    border-radius: 6px;
-    cursor: pointer;
+    font-size: 0.5em;
     font-weight: bold;
-    transition: background-color 0.2s;
-}
-
-.create-button:hover {
-    background-color: #c23c13;
+    border-radius: 50%;
+    padding: 4px 6px;
+    line-height: 1;
 }
 </style>

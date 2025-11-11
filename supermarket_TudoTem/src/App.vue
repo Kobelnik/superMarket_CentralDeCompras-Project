@@ -6,13 +6,11 @@
             <RouterView /> 
         </main>
         
-        <ProductList /> 
         <Footer />
     </div>
 </template>
 
 <script setup lang="ts">
-import ProductList from './components/ProductList.vue'; 
 import Header from './components/Header.vue';
 import Footer from './components/Footer.vue';
 </script>
