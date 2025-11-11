@@ -13,7 +13,7 @@
             </div>
 
             <div v-else class="empty-state">
-                <p>Nenhum produto encontrado. Crie um novo anúncio! 💡</p>
+                <p>Nenhum produto encontrado. Crie um novo anúncio! </p>
             </div>
         </div>
     </div>

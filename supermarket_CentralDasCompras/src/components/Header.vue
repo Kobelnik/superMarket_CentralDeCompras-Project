@@ -49,7 +49,7 @@ function goToCreateProduct() {
 }
 
 .header-logo { 
-    height: 40px; 
+    height: 60px; 
     display: block; 
 }
 
