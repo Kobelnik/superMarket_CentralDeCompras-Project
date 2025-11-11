@@ -40,13 +40,13 @@
 import { ref, onMounted } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { useProductStore } from '../stores/product';
-import { useCartStore } from '../stores/cart'; // 🔑 NOVO: Importa o Store do Carrinho
+import { useCartStore } from '../stores/cart'; 
 import type { Product } from '../types/Product.ts';
 
 const router = useRouter();
 const route = useRoute();
 const productStore = useProductStore();
-const cartStore = useCartStore(); // 🔑 NOVO: Inicializa o Store do Carrinho
+const cartStore = useCartStore();
 
 const product = ref<Product | null>(null);
 

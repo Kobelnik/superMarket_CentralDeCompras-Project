@@ -1,3 +1,12 @@
+/***********************************************************/
+/* FUNÇÃO DA PÁGINA */
+/***********************************************************/
+/* Este componente representa o cabeçalho de navegação.    */
+/* Ele é responsável por: 1) Exibir o logo para navegação  */
+/* para a Home. 2) Fornecer o campo de pesquisa (Busca).   */
+/* 3) Gerenciar botões de ação (Criar Anúncio/Carrinho)    */
+/* com lógica condicional baseada na rota atual.           */
+/***********************************************************/
 <template>
     <header class="app-header">
         <div class="logo-area">
@@ -24,6 +33,7 @@
                 >
                     Criar Anúncio
                 </button>
+                
                 <button 
                     class="action-button cart-button"
                     @click="goToCart"
@@ -41,19 +51,26 @@
 import { computed } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { useCartStore } from '../stores/cart'; 
-import { useFilterStore } from '../stores/filters';
+import { useFilterStore } from '../stores/filters'; 
 
+/***********************************************************/
+/* VARIÁVEIS DE INICIALIZAÇÃO */
+/***********************************************************/
+/* Instancia o roteador e o Pinia Stores. */
 const router = useRouter();
 const route = useRoute();
 const cartStore = useCartStore();
-const filterStore = useFilterStore();
+const filterStore = useFilterStore(); // Para ligar o input de pesquisa
 
+/* Propriedade computada que verifica se a rota atual é '/create-product'. */
 const isCreateProductPage = computed(() => route.path === '/create-product');
 
+/* Navega para a página de criação de anúncio. */
 function goToCreateProduct() {
     router.push('/create-product');
 }
 
+/* Navega para a página do carrinho de compras. */
 function goToCart() {
     router.push('/cart');
 }
@@ -81,11 +98,6 @@ function goToCart() {
     display: block; 
 }
 
-.nav-actions {
-    display: flex;
-    align-items: center;
-}
-
 .search-area {
     flex: 1;
     display: flex;
@@ -105,8 +117,9 @@ function goToCart() {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
-.search-input::placeholder {
-    color: rgba(29, 63, 85, 0.6);
+.nav-actions {
+    display: flex;
+    align-items: center;
 }
 
 .action-group {
@@ -144,6 +157,7 @@ function goToCart() {
     filter: brightness(0.95);
 }
 
+/* --- (Contador) --- */
 .cart-button {
     padding-right: 28px;
 }

@@ -1,3 +1,9 @@
+/************************************************************/
+/* Este componente representa a barra lateral de filtros    */
+/* Exibe todas as categorias e filtra as mesmas             */
+/* funcionalidade de criar e salvar novas categorias.       */
+/************************************************************/
+
 <template>
 	<aside class="sidebar">
 		<div class="sidebar-header">
@@ -43,6 +49,9 @@
 import { computed, ref, onMounted, watch } from 'vue';
 import { useCategoriesStore } from '../stores/categories';
 
+/***********************************************************/
+/* Emite as categorias para o componente pai (Home.vue).   */
+/***********************************************************/
 const emit = defineEmits<{
 	(e: 'update:categories', value: string[]): void
 }>();
@@ -53,6 +62,10 @@ const selectedCategories = ref<string[]>([]);
 const isAdding = ref(false);
 const newCategory = ref('');
 
+
+/***********************************************************/
+/* Emite a lista de categorias no arquivo pai (home).      */
+/***********************************************************/
 function emitSelection() {
 	emit('update:categories', [...selectedCategories.value]);
 }
@@ -62,6 +75,9 @@ onMounted(() => {
 	emitSelection();
 });
 
+/****************************************************************/
+/* Garante que a nova categoria criada, seja incluída na lista. */
+/****************************************************************/
 watch(
 	() => categories.value,
 	(newCategories, oldCategories = []) => {
@@ -82,6 +98,9 @@ function isSelected(category: string): boolean {
 	return selectedCategories.value.includes(category);
 }
 
+/******************************************************/
+/* Verifica se uma categoria está selecionada ou não. */
+/*************************************(****************/
 function toggleCategory(category: string) {
 	if (isSelected(category)) {
 		selectedCategories.value = selectedCategories.value.filter(c => c !== category);
@@ -91,6 +110,9 @@ function toggleCategory(category: string) {
 	emitSelection();
 }
 
+/***********************************************/
+/* Cria uma nova categoria e armazena no store */
+/***********************************************/
 function addCategoryFromSidebar() {
 	const value = newCategory.value.trim();
 	if (!value) return;

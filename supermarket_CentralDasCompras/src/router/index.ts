@@ -1,3 +1,7 @@
+/******************************/
+/* Arquivo de rotas do projeto*/
+/******************************/
+
 import { createRouter, createWebHistory } from 'vue-router';
 import Home from '../pages/Home.vue';
 import CreateProduct from '../pages/CreateProduct.vue';

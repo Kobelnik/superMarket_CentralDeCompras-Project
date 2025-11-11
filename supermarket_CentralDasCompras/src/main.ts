@@ -1,3 +1,7 @@
+/*****************************************************/
+/* Arquivo principal do projeto, ligado com o App.vue*/
+/*****************************************************/
+
 import { createApp } from 'vue';
 import App from './App.vue';
 import { router } from './router/index';

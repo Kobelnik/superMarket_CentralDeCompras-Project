@@ -5,9 +5,14 @@
 /* anúncios com filtros por categoria, busca global e       */
 /* carrinho inteligente.                                    */
 /*                                                          */
-/* Requisitos: Node.js 18+, npm.                            */
 /* Instalação: npm install                                  */
 /* Execução: npm run dev (porta padrão Vite).               */
+/*                                                          */
+/* Tecnologias usadas:                                      */
+/* 1. Vue + Type Script                                     */
+/* 2. Pínia (store): Biblioteca para compartilhar informa-  */
+/* ções, armazena, organiza e permite manipular os dados    */
+/* utilizados (ex: Getters (contador de itens no carrinho)) */
 /*                                                          */
 /* Fluxo principal:                                         */
 /* 1. Barra lateral abre com todas as categorias ativas.    */
@@ -18,37 +23,34 @@
 /* 5. Carrinho exibe resumo, aceita múltiplas quantidades,  */
 /*    filtra itens por categoria e recalcula o total.       */
 /*                                                          */
-/* Dicas de uso:                                            */
-/* - Clique no ícone da sidebar para ocultar/mostrar.       */
-/* - Use o botão + do card para adicionar direto ao carrinho*/
-/* - No carrinho, desative uma categoria para "pausar" os   */
-/*   itens daquela categoria na soma.                       */
+/* Crie os produtos paraque sejam exibidos na homepage      */
 /************************************************************/
 
 /************************************************************/
-/* EN - CENTRAL DAS COMPRAS                                 */
+/* EN-US - CENTRAL DAS COMPRAS                              */
 /************************************************************/
-/* Description: Web marketplace to publish and manage       */
-/* listings with category filters, global search, and a     */
-/* smart shopping cart.                                     */
+/* Description: Web marketplace for advertising and managing*/
+/* listings with category filters, global search, and       */
+/* smart shopping cart functionality.                       */
 /*                                                          */
-/* Requirements: Node.js 18+, npm.                          */
-/* Install: npm install                                     */
-/* Run: npm run dev (default Vite port).                    */
+/* Installation: npm install                                */
+/* Execution: npm run dev (Vite default port).              */
 /*                                                          */
-/* Core flow:                                               */
-/* 1. Sidebar opens with every category selected by default.*/
-/* 2. Header search filters titles in real time.            */
-/* 3. Product cards highlight title, category and price.    */
-/* 4. Create Product page allows new listings and dynamic   */
-/*    category creation synced with the sidebar.            */
-/* 5. Cart lists items, supports multi-quantity, filters    */
-/*    by category and recomputes totals accordingly.        */
+/* Technologies Used:                                       */
+/* 1. Vue + TypeScript                                      */
+/* 2. Pinia (store): Library for sharing information,       */
+/* storing, organizing, and manipulating the data used      */
+/* (e.g., Getters (cart item counter))                      */
 /*                                                          */
-/* Usage tips:                                              */
-/* - Toggle the sidebar icon to hide/show filters.          */
-/* - Use the card + button to send products to the cart     */
-/*   instantly.                                             */
-/* - In the cart, disable a category to temporarily remove  */
-/*   those items from the payable total.                    */
+/* Main Flow:                                               */
+/* 1. Sidebar opens with all categories active.             */
+/* 2. The header search filters by title in real-time.      */
+/* 3. Cards show prominent title, category, and price.      */
+/* 4. Creation page allows product registration and the     */
+/* addition of new categories.                              */
+/* 5. Cart displays summary, accepts multiple quantities,   */
+/* filters items by specific category, and recalculates     */
+/* the total.                                               */
+/*                                                          */
+/* Create products to be displayed on the homepage          */
 /************************************************************/

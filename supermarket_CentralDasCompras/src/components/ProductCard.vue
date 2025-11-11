@@ -1,3 +1,10 @@
+/***********************************************************/
+/* Esee componente representa o cartão de exibição de um   */
+/* cada card de cada anuncio criado pelo usuario           */
+/* É o principal ponto de interação para navegação (clique */
+/* no card) e para a ação de adição ao carrinho (botão +). */
+/***********************************************************/
+
 <template>
     <RouterLink :to="`/product/${product.id}`" class="product-card-link">
         <div class="product-card">
@@ -26,12 +33,18 @@ import type { Product } from '../types/Product.ts';
 import { RouterLink } from 'vue-router';
 import { useCartStore } from '../stores/cart';
 
+/***********************************************************/
+/* Inicializa o Store do Carrinho.                         */
+/***********************************************************/
 const cartStore = useCartStore();
 
 const props = defineProps<{
     product: Product;
 }>();
 
+/*************************************************************/
+/* Formata o valor numérico para o padrão de moeda BRL (R$). */
+/*************************************************************/
 const formatCurrency = (value: number): string => {
     return new Intl.NumberFormat('pt-BR', {
         style: 'currency',
