@@ -8,7 +8,7 @@
 <template>
     <footer class="app-footer-wrapper">
         <div class="app-footer">
-            <p>© 2024 Central de Compras Marketplace. Todos os direitos reservados.</p>
+            <p>© 2025 Central de Compras Marketplace. Todos os direitos reservados.</p>
         </div>
     </footer>
 </template>
