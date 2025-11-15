@@ -56,21 +56,17 @@ import { useFilterStore } from '../stores/filters';
 /***********************************************************/
 /* VARIÁVEIS DE INICIALIZAÇÃO */
 /***********************************************************/
-/* Instancia o roteador e o Pinia Stores. */
 const router = useRouter();
 const route = useRoute();
 const cartStore = useCartStore();
-const filterStore = useFilterStore(); // Para ligar o input de pesquisa
+const filterStore = useFilterStore(); 
 
-/* Propriedade computada que verifica se a rota atual é '/create-product'. */
 const isCreateProductPage = computed(() => route.path === '/create-product');
 
-/* Navega para a página de criação de anúncio. */
 function goToCreateProduct() {
     router.push('/create-product');
 }
 
-/* Navega para a página do carrinho de compras. */
 function goToCart() {
     router.push('/cart');
 }
